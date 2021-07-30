@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+bearer_token.yaml
+notebooks/deleted_tweets.ndjson
+poetry.lock
+test_data/twacapic-parliamentarians-tryout.csv
