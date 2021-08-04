@@ -21,7 +21,7 @@ def cli():
               help="Path to output file, will be prefixed with today's date. Default: `errors.ndjson`")
 @click.option('--tkpath', default='bearer_token.yaml',
               help='Path to Twitter API v2 bearer token YAML file. Default: `bearer_token.yaml`')
-@click.option('--sample', default=0, help='If given, sample # number of tweets only')
+@click.option('--sample', default=0, help='If given, sample INTEGER number of tweets only')
 def knock(tweetfile, outpath, tkpath, sample):
 
     with open(tkpath) as f:

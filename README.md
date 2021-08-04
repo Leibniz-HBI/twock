@@ -1,7 +1,23 @@
 # twock
 Ping a list of tweets for their status (deleted/available/...) #twocktwock
 
-So far this is only a prototype in `notebooks/`. It will become a CLI tool installable via pip, and maybe integrated in twacapic.
+## Usage
+
+### Knocking Tweets
+
+```
+twock knock [OPTIONS] TWEETFILE
+
+  Ping (knock) a list of tweets. Expects file path to CSV with `id` column.
+
+Options:
+  --outpath TEXT    Path to output file, will be prefixed with today's date.
+                    Default: `errors.ndjson`
+  --tkpath TEXT     Path to Twitter API v2 bearer token YAML file. Default:
+                    `bearer_token.yaml`
+  --sample INTEGER  If given, sample INTEGER number of tweets only
+  --help            Show this message and exit.
+```
 
 ## Developer Install
 
