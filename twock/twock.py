@@ -17,11 +17,12 @@ def cli():
 
 @cli.command(help='Ping (knock) a list of tweets. Expects file path to CSV with `id` column.')
 @click.argument('tweetfile')
-@click.option('--outpath', default='errors.ndjson',
+@click.option('--outpath', default='errors',
               help="Path to output file, will be prefixed with today's date. Default: `errors.ndjson`")
 @click.option('--tkpath', default='bearer_token.yaml',
               help='Path to Twitter API v2 bearer token YAML file. Default: `bearer_token.yaml`')
-def knock(tweetfile, outpath, tkpath):
+@click.option('--sample', default=0, help='If given, sample # number of tweets only')
+def knock(tweetfile, outpath, tkpath, sample):
 
     with open(tkpath) as f:
         bearer_token = yaml.safe_load(f)['bearer_token']
@@ -36,6 +37,9 @@ def knock(tweetfile, outpath, tkpath):
     logger.info('read tweet file')
 
     ids = tweets['id']
+
+    if sample > 0:
+        ids = ids.sample(sample)
 
     lookup = t.tweet_lookup(ids.values)
 
@@ -77,13 +81,16 @@ def knock(tweetfile, outpath, tkpath):
                 # the number of errors should explain the missing tweets.
                 assert page_length == 100 - n
 
-        logger.info(f'finished page {pages}')
+        logger.info(f'finished page {pages} of {ceil(len(ids) / 100)}')
 
     assert pages == ceil(len(ids) / 100)    # Have we processed all pages?
 
+    result_path = f'{datetime.strftime(datetime.now(), "%Y%m%d_%H%M")}_{outpath}.ndjson'
     # write to file with today's date in front
-    with open(f'{datetime.strftime(datetime.now(), "%Y%m%d")}_deleted_tweets.ndjson', 'w') as f:
+    with open(f'{result_path}', 'w') as f:
         ndjson.dump(errors, f)
+
+    logger.info(f'written result to {result_path}')
 
 
 if __name__ == '__main__':
