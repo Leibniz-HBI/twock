@@ -1,5 +1,6 @@
 # twock
-Ping a list of tweets for their status (deleted/available/...) #twocktwock
+
+Ping/knock a list of tweets to enquire their status (deleted/available/...) #twockknock
 
 ## Usage
 

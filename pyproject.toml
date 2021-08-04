@@ -1,8 +1,16 @@
 [tool.poetry]
 name = "twock"
 version = "0.1.0"
-description = ""
-authors = ["Felix Victor Münch <flxvctr@protonmail.com>"]
+description = "Ping/Knock a list of tweets to enquire their status (deleted/available/...) #twockknock"
+authors = ["Felix Victor Münch <f.muench@leibniz-hbi.de>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Leibniz-HBI/twock"
+classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Science/Research",
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
