@@ -1,6 +1,6 @@
 # twock
 
-Ping/knock a list of tweets to enquire their status (deleted/available/...) #twockknock
+Ping/knock a list of tweets and return reachability issues (deleted/protected/withheld...) #twockknock
 
 ## Usage
 
