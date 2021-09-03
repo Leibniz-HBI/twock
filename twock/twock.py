@@ -1,5 +1,6 @@
 from datetime import datetime
 from math import ceil
+from pathlib import Path
 
 import click
 import ndjson
@@ -16,7 +17,7 @@ def cli():
 
 
 @cli.command(help='Ping (knock) a list of tweets. Expects file path to CSV with `id` column.')
-@click.argument('tweetfile')
+@click.argument('tweetfile', type=click.Path(exists=True, file_okay=True, dir_okay=True))
 @click.option('--outpath', default='errors',
               help="Path to output file, will be prefixed with today's date. Default: `errors.ndjson`")
 @click.option('--tkpath', default='bearer_token.yaml',
@@ -24,15 +25,25 @@ def cli():
 @click.option('--sample', default=0, help='If given, sample INTEGER number of tweets only')
 def knock(tweetfile, outpath, tkpath, sample):
 
+
     with open(tkpath) as f:
         bearer_token = yaml.safe_load(f)['bearer_token']
 
     t = Twarc2(bearer_token=bearer_token, connection_errors=10)
 
     logger.info('reading tweet file')
+    
+    tweets = None
+    tweetpath = Path(tweetfile)
 
-    tweets = pd.read_csv(
-        tweetfile, lineterminator='\n', dtype=str)
+    if tweetpath.is_dir():
+        csvs = tweetpath.glob('*.csv')
+        tweets = pd.concat(
+            map(pd.read_csv, csvs)
+        )
+    else:
+        tweets = pd.read_csv(
+            tweetfile, lineterminator='\n', dtype=str)
 
     logger.info('read tweet file')
 
