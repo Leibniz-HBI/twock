@@ -20,6 +20,10 @@ Options:
   --help            Show this message and exit.
 ```
 
+### Authentification
+
+You need to have access to the Twitter V2 API and t obtain a valid bearer token. Replace the template value in `bearer_token.yml` with your actual credentials.
+
 ## Developer Install
 
 1. Install [poetry](https://python-poetry.org/docs/#installation)
