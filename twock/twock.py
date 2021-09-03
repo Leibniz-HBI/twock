@@ -36,10 +36,13 @@ def knock(tweetfile, outpath, tkpath, sample):
     tweets = None
     tweetpath = Path(tweetfile)
 
+    def read_csv(path: Path):
+        return pd.read_csv(path, lineterminator='\n', dtype=str)
+
     if tweetpath.is_dir():
         csvs = tweetpath.glob('*.csv')
         tweets = pd.concat(
-            map(pd.read_csv, csvs)
+            map(read_csv, csvs)
         )
     else:
         tweets = pd.read_csv(
