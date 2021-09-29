@@ -132,4 +132,6 @@ notebooks/deleted_tweets.ndjson
 poetry.lock
 test_data/twacapic-parliamentarians-tryout.csv
 *.ndjson
+*.csv
 test_data/twacapic-parliamentarians-tryout-2.csv
+bearer_token.yml
