@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "twock"
-version = "0.1.1"
+version = "0.1.2"
 description = "Ping/Knock a list of tweets to enquire their status (deleted/available/...) #twockknock"
 authors = ["Felix Victor Münch <f.muench@leibniz-hbi.de>","Philipp Kessling <p.kessling@leibniz-hbi.de>"]
 license = "MIT"

@@ -6,7 +6,7 @@ Ping/knock a list of tweets and return reachability issues (deleted/protected/wi
 
 ### Knocking Tweets
 
-```
+```txt
 twock knock [OPTIONS] TWEETFILE
 
   Ping (knock) a list of tweets. Expects file path to CSV with `id` column.

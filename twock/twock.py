@@ -25,14 +25,13 @@ def cli():
 @click.option('--sample', default=0, help='If given, sample INTEGER number of tweets only')
 def knock(tweetfile, outpath, tkpath, sample):
 
-
     with open(tkpath) as f:
         bearer_token = yaml.safe_load(f)['bearer_token']
 
     t = Twarc2(bearer_token=bearer_token, connection_errors=10)
 
     logger.info('reading tweet file')
-    
+
     tweets = None
     tweetpath = Path(tweetfile)
 
@@ -66,11 +65,14 @@ def knock(tweetfile, outpath, tkpath, sample):
     for page in lookup:
         pages += 1
 
-        for tweet in page['data']:
-            if 'withheld' in tweet.keys():  # check whether tweet is withheld in any country
-                errors.append(tweet)  # if so, append tweet object to errors
+        try:
+            for tweet in page['data']:
+                if 'withheld' in tweet.keys():  # check whether tweet is withheld in any country
+                    errors.append(tweet)  # if so, append tweet object to errors
 
-        page_length = len(page['data'])
+            page_length = len(page['data'])
+        except KeyError:  # only deleted tweets
+            page_length = 0
 
         if page_length != 100:  # Now focus on 'incomplete' pages
 
