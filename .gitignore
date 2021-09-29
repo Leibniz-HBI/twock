@@ -130,8 +130,11 @@ dmypy.json
 bearer_token.yaml
 notebooks/deleted_tweets.ndjson
 poetry.lock
-test_data/twacapic-parliamentarians-tryout.csv
+test_data/
 *.ndjson
+<<<<<<< HEAD
 *.csv
 test_data/twacapic-parliamentarians-tryout-2.csv
 bearer_token.yml
+=======
+>>>>>>> c096e00888ca2922ad1cb169c82da7bf401d7be3
